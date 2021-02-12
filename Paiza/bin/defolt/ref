@@ -1,0 +1,37 @@
+/*float x = 50f,
+				y = 55f,
+				c = 15f;
+		
+		float val1 = x - c * x / (x + y);
+		float val2 = y - c * y / (x + y);
+		out.println(val1+" "+val2);
+		
+		double x = 50,
+				y = 55,
+				c = 15;
+		
+		double val1 = (double) Math.round((x - c * x / (x + y)) * 10) / 10;
+		double val2 = (double) Math.round((y - c * y / (x + y)) * 10) / 10;
+		out.print(val1+" "+val2);
+		
+		out.printf("%.1f", 50 - 15 * 50 / (50 + 55f));
+		out.println(55-15*55/(50+55));
+		
+		float val1 = 750 / 105f;
+		double val2 = (double) 750 / 105;
+		
+		out.printf("%.2f %.1f", val1, val2);*/
+		
+		/* X - C * X / (X + Y)
+		 * 50 - 15 * 50 / (50 + 55)
+		 * 50 - 750 / 105
+		 * 50 - 7.14285714285
+		 * 
+		 * 100 * Y / (X + Y)
+		 * 
+		 * Y / (X + Y) * 100
+		 * 47.1 / 109.9 * 100 = 42%
+		 */
+		
+		//out.println(47.1 / 109.9 * 100);
+		//out.println(Math.floor(100 * 47.1 / 109.9));

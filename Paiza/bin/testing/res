@@ -1,0 +1,128 @@
+package sugoroku;
+import static java.lang.System.*;
+
+public class Test {
+
+	@SuppressWarnings("resource")
+	public static void main(String[] args) {
+		// TODO Auto-generated limitethod stub
+		
+		int[] wheel = {0, 3, -2, -2, -1, 1, -2, 0};
+		//int[] wheel = {0, -3, -2, -2, 0, 1, -1, 0};	//	7 is Yes
+													//	1, 2, 3 and 4 are not continuous
+													//	5 and 6 are endless loop
+
+		//int[] wheel = {0, 6, -2, -2, 0, 1, -1, 0};	//	1, 3 and 7 are Yes
+													//	2 and 4 are not continuous
+													//	5 and 6 are endless loop
+		
+		//int[] wheel = {0, 4, 1, 0, 1, -4, 0};	//	1, 4 and 5 are endless loop
+												//	2 and 3 are not continuos
+												//	6 is Yes
+		
+		//int[] wheel = {0, 1, 0, 1, 0};	//	1 and 2 are not continuos
+										//	3 and 4 are Yes		
+		
+		int len = wheel.length;		
+		int pass = 0;
+		
+		//int limit = 3;
+		int limit = new java.util.Scanner(in).nextInt();
+		
+		if(limit >= 1 && limit < len)
+		{
+			if(limit == (len - 1))
+				out.print("Yes: limit index is the last cell.");
+			else
+			{
+				while(true)
+				{
+					pass++;
+					out.println("Pass "+pass);
+					if(pass == limit)	//	pass equals the limit
+					{
+						/* if pass is equal to limit (which is the last cell with
+						 * the value of 0), display "Yes" and break loop
+						 */
+						if(pass == (len - 1))
+						{
+							out.print("Yes: limit index is the last cell.");
+							break;
+						}
+						else if(wheel[pass] > 0)
+						{
+							limit = pass;
+							limit += wheel[pass];
+							
+							if(limit > (len - 1))
+							{
+								err.print("No: limit is greater than wheel length.");
+								break;
+							}
+						}
+						else if(wheel[pass] < 0)	//	if wheel[pass] is negative
+						{
+							
+							int right = wheel[pass];
+							pass += wheel[pass];
+							
+							if(pass <= 0)
+							{
+								err.print("No: pass has value of 0 and/or\nbeyond which cannot continue.");
+								break;
+							}
+							
+							int left = wheel[pass];
+							if(Math.abs(right) == left)
+							{
+								err.print("No: endless iteration.");
+								break;
+							}
+							limit = ++left;	//	-1
+							
+							if(limit <= 0)
+							{
+								err.print("No: limit is negative.");
+								break;
+							}
+						}
+						else
+						{
+							err.print("No: limit index has a value\nof 0 which cannot continue.");
+							break;
+						}
+					}
+				}
+			}
+		}
+		else
+			err.println("No: limit is not in range.");
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

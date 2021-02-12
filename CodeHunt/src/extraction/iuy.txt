@@ -1,0 +1,2 @@
+In computer science, graphs are used to represent networks of communication, data organization,
+computational devices, the flow of computation, etc.

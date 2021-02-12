@@ -1,0 +1,35 @@
+public static void computePaths(Vertex source)
+	{
+		source.setDistance(0);	// set the source's distance to 0
+		
+		PriorityQueue<Vertex> vertexQueue = new PriorityQueue<Vertex>(10);
+		vertexQueue.add(source);
+		
+		while(!vertexQueue.isEmpty())
+		{
+			Vertex polledVertex = vertexQueue.poll();
+			
+			for(Edge edge : polledVertex.getAdjacencies())
+			{
+				Vertex vertex = edge.getTarget();
+				double weight = edge.getWeight();
+				double distanceThroughU = polledVertex.getDistance() + weight;
+				
+				System.out.println("polledVertex.getDistance(): "+polledVertex.getDistance());
+				System.out.println("weight: "+weight);
+				System.out.println("distanceThroughU: "+distanceThroughU);
+				System.out.println("vertex.getDistance(): "+vertex.getDistance());
+				System.out.println("distanceThroughU < vertex.getDistance(): "+(distanceThroughU < vertex.getDistance()));
+				
+				if(distanceThroughU < vertex.getDistance())
+				{
+					vertex.setDistance(distanceThroughU);
+					vertex.setPrevious(polledVertex);
+					vertexQueue.add(vertex);
+					
+					System.out.print("vertex.getDistance(): "+vertex.getDistance()+"\n");
+				}
+				System.out.println();
+			}//	end for loop
+		}//	end while
+	}//	end computePaths

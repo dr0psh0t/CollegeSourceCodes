@@ -1,0 +1,41 @@
+function translateOperation(number) {
+    var operationMap = {
+        "1": "pourWater",
+        "2": "addCoffee",
+        "3": "drink"
+    };
+    return operationMap[number];
+}
+
+process.stdin.resume();
+process.stdin.setEncoding('utf8');
+process.stdin.on('data', function (chunk) {
+    var input = chunk.toString().split("\n");
+    var numOperations = parseInt(input[0]);
+    var operations = [];
+    for (var i = 1; i < 1 + numOperations; i++) {
+        var line = input[i].split(" ");
+        operations.push({
+            operationType: translateOperation(line[0]),
+            quantity: parseFloat(line[1])
+        });
+    }
+
+    var water = 0.0;
+    var coffee = 0.0;
+    for (var j = 0; j < operations.length; j++) {
+        var operationType = operations[j].operationType;
+        var quantity = operations[j].quantity;
+
+        if (operationType === "pourWater") {
+            water += quantity;
+        } else if (operationType === "addCoffee") {
+            coffee += quantity;
+        } else {
+            water = water - quantity * water / (water + coffee);
+            coffee = coffee - quantity * coffee / (water + coffee);
+        }
+    }
+
+    console.log(Math.floor(coffee * 100 / (water + coffee)));
+});

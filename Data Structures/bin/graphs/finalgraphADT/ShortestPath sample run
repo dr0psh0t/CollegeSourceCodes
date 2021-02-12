@@ -1,0 +1,14 @@
+Distance from Harrisburg to Harrisburg: 0.0
+Path: [Harrisburg]
+Distance from Harrisburg to Baltimore: 79.83
+Path: [Harrisburg, Baltimore]
+Distance from Harrisburg to Washington: 119.25
+Path: [Harrisburg, Baltimore, Washington]
+Distance from Harrisburg to Philadelphia: 143.2
+Path: [Harrisburg, Allentown, Philadelphia]
+Distance from Harrisburg to Binghamton: 215.62
+Path: [Harrisburg, Allentown, Binghamton]
+Distance from Harrisburg to Allentown: 81.15
+Path: [Harrisburg, Allentown]
+Distance from Harrisburg to New York: 172.78
+Path: [Harrisburg, Allentown, New York]

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="261.0" prefWidth="311.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="application.MainController">
+   <children>
+      <Label fx:id="lblStatus" layoutX="142.0" layoutY="21.0" text="Label" />
+      <Button fx:id="plusButton" layoutX="53.0" layoutY="69.0" mnemonicParsing="false" onAction="#increment" prefHeight="25.0" prefWidth="41.0" text="+" />
+      <Button fx:id="minusButton" layoutX="201.0" layoutY="69.0" mnemonicParsing="false" onAction="#decrement" prefHeight="25.0" prefWidth="48.0" text="-" />
+      <ProgressBar fx:id="pb" layoutX="56.0" layoutY="113.0" prefWidth="200.0" progress="0.03" />
+      <ProgressIndicator fx:id="pi" layoutX="82.0" layoutY="145.0" prefHeight="102.0" prefWidth="160.0" progress="0.0" />
+   </children>
+</AnchorPane>

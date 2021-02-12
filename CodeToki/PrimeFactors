@@ -1,0 +1,23 @@
+static void Main(String[] args)
+{
+	Console.Write("Input a number: ");
+	int num = Convert.ToInt32(console.readLine());
+	
+	primeFactors(num);
+	Console.Write("\n\n");
+}
+
+public static void primeFactors(int n)
+{
+	int i = 2;
+	while(n > 1)
+	{
+		if(n % i == 0)
+	    {
+			Console.Write(i+" ");
+			n = n / i;
+	    }
+		else
+			i++;
+	}
+}

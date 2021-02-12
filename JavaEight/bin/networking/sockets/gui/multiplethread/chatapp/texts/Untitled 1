@@ -1,0 +1,257 @@
+package networking.sockets.gui.multiplethread.chatapp;
+
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.geometry.Insets;
+import javafx.geometry.Pos;
+import javafx.scene.Scene;
+import javafx.scene.control.Label;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.scene.control.TextField;
+import javafx.scene.layout.BorderPane;
+import javafx.stage.Stage;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.io.PrintWriter;
+import java.net.Socket;
+
+public class Client extends Application
+{
+    PrintWriter toServer = null;
+    BufferedReader fromServer = null;
+
+    @SuppressWarnings("resource")
+	@Override
+    public void start(Stage primaryStage)
+    {
+        //  panel p to hold the label and text field
+        BorderPane paneForTextField = new BorderPane();
+        paneForTextField.setPadding(new Insets(5, 5, 5, 5));
+        paneForTextField.setStyle("-fx-border-color: green");
+        paneForTextField.setLeft(new Label("Enter a radius: "));
+
+        TextField tf = new TextField();
+        tf.setAlignment(Pos.BOTTOM_RIGHT);
+        paneForTextField.setCenter(tf);
+
+        BorderPane mainPane = new BorderPane();
+        //  text arae to display contents
+        TextArea ta = new TextArea();
+        mainPane.setCenter(new ScrollPane(ta));
+        mainPane.setTop(paneForTextField);
+
+        //  createa a scene and place it in the stage
+        Scene scene = new Scene(mainPane, 450, 200);
+        primaryStage.setTitle("Client");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+        try
+        {
+            //  create a socket to connect to the server
+            Socket socket = new Socket("localhost", 8000);
+
+            toServer = new PrintWriter(socket.getOutputStream());
+            toServer.flush();
+            fromServer = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+
+            new Thread(new Runnable() {
+                @Override
+                public void run()
+                {
+                    while (true)
+                    {
+                        try
+                        {
+                            String serverReply = fromServer.readLine();
+
+                            Platform.runLater(new Runnable() {
+                                @Override
+                                public void run() {
+                                    ta.appendText("client - " + serverReply + '\n');
+                                }
+                            });
+                        }
+                        catch (IOException e){
+                            System.err.println(e.toString());
+                        }
+                    }
+                }
+            }).start();
+        }
+        catch (IOException ex) {
+            ta.appendText(ex.toString());
+        }
+
+        tf.setOnAction(new EventHandler<ActionEvent>() {
+            @Override
+            public void handle(ActionEvent event)
+            {
+                String text = tf.getText();
+                toServer.println(text);
+                toServer.flush();
+            }
+        });
+    }
+
+    public static void main(String[] args){
+        launch(args);
+    }
+}
+
+----
+
+
+package networking.sockets.gui.multiplethread.chatapp;
+
+import javafx.application.Application;
+import javafx.application.Platform;
+import javafx.scene.Scene;
+import javafx.scene.control.ScrollPane;
+import javafx.scene.control.TextArea;
+import javafx.stage.Stage;
+
+import java.io.*;
+import java.net.ServerSocket;
+import java.net.Socket;
+import java.util.Date;
+import java.util.HashMap;
+import java.util.Iterator;
+import java.util.Map;
+
+public class MultiThreadServer extends Application
+{
+    //  text area for displaying contents
+    private TextArea ta = new TextArea();
+
+    //  number a client
+    private int clientNo = 0;
+
+    private Map<Integer, Socket> clients = new HashMap<>();
+
+    @Override
+    public void start(Stage primaryStage)
+    {
+        Scene scene = new Scene(new ScrollPane(ta));
+        primaryStage.setTitle("MultiThreadServer");
+        primaryStage.setScene(scene);
+        primaryStage.show();
+
+        new Thread(new Runnable() {
+            @SuppressWarnings("resource")
+			@Override
+            public void run()
+            {
+                try
+                {
+                    //  create a server socket
+                    ServerSocket serverSocket = new ServerSocket(8000);
+
+                    ta.appendText("MultiThreadServer started at " + new Date() + "\n");
+
+                    while (true)
+                    {
+                        // listen for a new connection request
+                        Socket socket = serverSocket.accept();
+
+                        clientNo++;
+
+                        Platform.runLater(new Runnable() {
+                            @Override
+                            public void run()
+                            {
+                                //  display the client number
+                                ta.appendText("Starting thread for client " + clientNo + " at " + new Date() + '\n');
+                            }
+                        });
+
+                        NewClient newClient = new NewClient(socket, clientNo);
+
+                        clients.put(socket.getPort(), socket);
+
+                        //  create and start a new thread for the connection
+                        new Thread(newClient).start();
+                    }
+                }
+                catch (IOException e){
+                    e.printStackTrace();
+                }
+            }
+        }).start();
+    }
+
+    //  define the thread class for handling new connection
+    class NewClient implements Runnable
+    {
+        private Socket socket;  //  a connected socket
+        private int clientNo;
+
+        public NewClient(Socket socket, int clientNo)
+        {
+            this.socket = socket;
+            this.clientNo = clientNo;
+        }
+
+        //  run a thead
+        @Override
+        public void run()
+        {
+            try
+            {
+                BufferedReader inputFromClient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
+                PrintWriter outputToClient = null;
+
+                //  continuously serve the client
+                while (true)
+                {
+                    String textClient = inputFromClient.readLine();
+
+                    for (Iterator<Integer> iter = clients.keySet().iterator(); iter.hasNext();)
+                    {
+                        int key = iter.next();
+
+                        //  get socket object by its key
+                        Socket client = clients.get(key);
+
+                        outputToClient = new PrintWriter(client.getOutputStream());
+
+                        outputToClient.println(clientNo + " - " + textClient);
+                        outputToClient.flush();
+                    }
+                }
+            }
+            catch (IOException e) {
+                e.printStackTrace();
+            }
+        }
+    }
+}
+
+
+----
+
+
+package networking.sockets.gui.multiplethread.chatapp;
+
+import java.io.IOException;
+import java.net.Socket;
+
+public class CustomSocket extends Socket
+{
+    private String pcName;
+
+    public CustomSocket(String server, int port, String pcName) throws IOException
+    {
+        super(server, port);
+        this.pcName = pcName;
+    }
+
+    public String getPcName(){
+        return pcName;
+    }
+}

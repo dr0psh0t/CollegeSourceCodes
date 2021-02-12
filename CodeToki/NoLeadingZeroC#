@@ -1,0 +1,30 @@
+static void Main(String[] args)
+{
+	Console.Write("Input a number: ");
+	String num = Console.ReadLine();
+	
+	Console.Write("Reverse: "+reverseNumber(num));
+}
+
+public static String reverseNumber(String num)
+{
+    String str = "";
+    String strNum = "";
+    for(int i = num.length - 1; i >= 0; i--)
+    	str = str + num[i];
+      
+    Boolean noZero = false;
+    int x = 0;
+    while(x <= str.length - 1 && !noZero)
+      {
+         if(str[x] != '0')
+         {
+            for(int j = x; j <= str.length - 1; j++)
+               strNum = strNum + str[j];
+            noZero = true;
+         }
+         else
+            x++;
+      }
+      return strNum;
+   }

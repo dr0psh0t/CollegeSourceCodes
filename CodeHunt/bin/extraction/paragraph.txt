@@ -1,0 +1,9 @@
+In computer science, graphs are used to represent networks of communication, data organization,
+computational devices, the flow of computation, etc. For instance, the link structure of a
+website can be represented by a directed graph, in which the vertices represent web pages and
+directed edges represent links from one page to another. A similar approach can be taken to problems
+in travel, biology, computer chip design, and many other fields. The development of algorithms to
+handle graphs is therefore of major interest in computer science. The transformation of graphs is
+often formalized and represented by graph rewrite systems. Complementary to graph transformation
+systems focusing on rule-based in-memory manipulation of graphs are graph databases geared towards
+transaction-safe, persistent storing and querying of graph-structured data.

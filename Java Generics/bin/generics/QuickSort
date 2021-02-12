@@ -1,0 +1,32 @@
+private void swap(int first, int second)
+{
+	int temp;
+		
+	temp = list[first];
+	list[first] = list[second];
+	list[second] = temp; 
+}
+
+private int partition(int list[], int first, int last)
+{
+	int index, smallIndex, pivot;
+	swap(first, (first + last) / 2);
+	pivot = list[first];
+	smallIndex = first;
+		
+	for(index = first + 1; index <= last; index++)
+	{
+		if((list[index] - pivot) < 0)
+		{
+			smallIndex++;
+			swap(smallIndex, index);
+		}
+	}
+		
+	swap(first, smallIndex);
+	return smallIndex;
+}
+	
+public int partitioned(){
+	return partition(list, 0, length - 1);
+}

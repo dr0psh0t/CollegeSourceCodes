@@ -1,0 +1,25 @@
+static void Main(String[] args)
+{
+	int num, max = 0, x = 0, count = 0;
+	
+	Console.Write("Input numbers with ending with -99 to stop: \n");
+	while(count != -99)
+	{
+		num = convert.toInt32(console.readLine());
+		if(num != -99)
+		{
+			max = m.maximum(num, x);
+			x = num;
+		}
+		count = num;
+	}
+	Console.Write("Max: "+max);
+}
+
+public static int maximum(int x, int y)
+{
+	if(x >= y)
+		return x;
+	else
+		return y;
+}

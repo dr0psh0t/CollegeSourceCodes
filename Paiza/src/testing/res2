@@ -1,0 +1,137 @@
+package sugoroku;
+import static java.lang.System.*;
+
+public class Test {
+
+	@SuppressWarnings("resource")
+	public static void main(String[] args) {
+		// TODO Auto-generated limitethod stub
+		
+		int[] wheel = {0, 3, -2, -2, -1, 1, -2, 0};
+		//int[] wheel = {0, -3, -2, -2, 0, 1, -1, 0};	//	7 is Yes
+													//	1, 2, 3 and 4 are not continuous
+													//	5 and 6 are endless loop
+
+		//int[] wheel = {0, 6, -2, -2, 0, 1, -1, 0};	//	1, 3 and 7 are Yes
+													//	2 and 4 are not continuous
+													//	5 and 6 are endless loop
+		
+		//int[] wheel = {0, 4, 1, 0, 1, -4, 0};	//	1, 4 and 5 are endless loop
+												//	2 and 3 are not continuos
+												//	6 is Yes
+		
+		//int[] wheel = {0, 1, 0, 1, 0};	//	1 and 2 are not continuos
+										//	3 and 4 are Yes		
+		
+		int len = wheel.length;		
+		int pass = 0;
+		
+		int limit = new java.util.Scanner(System.in).nextInt();
+		
+		if(limit >= 1 && limit < 100)
+		{
+			if(limit == (len - 1))
+				System.out.print("Yes: limit index is the last cell.");
+			else if(limit >= len)
+				System.out.print("No: limit is more than the wheel length");
+			else
+			{
+				while(true)
+				{
+					pass++;
+					if(pass == limit)
+					{
+						if(wheel[pass] == 0)
+						{
+							if(pass == (len - 1))
+							{
+								System.out.print("Yes: pass stops at the last cell");
+								break;
+							}
+							else
+								err.print("No: pass can't move anymore");
+						}
+						else if(wheel[pass] > 0)
+						{
+							limit = pass;
+							limit += wheel[pass];
+							
+							if(limit > (len - 1))
+							{
+								err.print("No: limit is greater than wheel length.");
+								break;
+							}
+						}
+						else	//int[] wheel = {0, 3, -2, -2, -1, 1, -2, 0};
+						{
+							int right = wheel[pass];//-1
+							pass += right;//3
+							
+							if(pass <= 0)
+							{
+								err.print("No: pass can't move anymore");
+								break;
+							}
+							else
+							{
+								int left = wheel[pass];//-2
+								out.print("right = "+right+" left = "+left+" pass = "+pass+"\n");
+								if(Math.abs(left) == Math.abs(right))
+								{
+									err.print("No: endless loop");
+									break;
+								}
+								else
+								{
+									if((pass + left) == (len - 1))
+									{
+										out.print("Yes: limit is the last cell");
+										break;
+									}
+									else
+									{
+										limit = ++left;
+										if(limit <= 0)
+										{
+											err.print("No: limit is negative");
+											break;
+										}
+									}
+								}
+							}
+						}
+					}
+				}
+			}
+		}
+		else
+			err.println("No: limit is not in range.");
+	}
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

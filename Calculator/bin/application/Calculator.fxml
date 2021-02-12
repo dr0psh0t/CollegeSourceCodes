@@ -1,0 +1,107 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.text.*?>
+<?import javafx.scene.control.*?>
+<?import java.lang.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.layout.AnchorPane?>
+
+<AnchorPane prefHeight="379.0" prefWidth="267.0" xmlns="http://javafx.com/javafx/8" xmlns:fx="http://javafx.com/fxml/1" fx:controller="controller.ControllCalc">
+   <children>
+      <Button fx:id="divide" layoutX="195.0" layoutY="120.0" mnemonicParsing="false" onAction="#divideEvent" prefHeight="60.0" prefWidth="60.0" text="/">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="times" layoutX="195.0" layoutY="180.0" mnemonicParsing="false" onAction="#timesEvent" prefHeight="60.0" prefWidth="60.0" text="X">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="minus" layoutX="195.0" layoutY="240.0" mnemonicParsing="false" onAction="#minusEvent" prefHeight="60.0" prefWidth="60.0" text="-">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="plus" layoutX="195.0" layoutY="300.0" mnemonicParsing="false" onAction="#plusEvent" prefHeight="60.0" prefWidth="60.0" text="+">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="nine" layoutX="135.0" layoutY="120.0" mnemonicParsing="false" onAction="#nineEvent" prefHeight="60.0" prefWidth="60.0" text="9">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="six" layoutX="135.0" layoutY="180.0" mnemonicParsing="false" onAction="#sixEvent" prefHeight="60.0" prefWidth="60.0" text="6">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="five" layoutX="76.0" layoutY="180.0" mnemonicParsing="false" onAction="#fiveEvent" prefHeight="60.0" prefWidth="60.0" text="5">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="four" layoutX="16.0" layoutY="180.0" mnemonicParsing="false" onAction="#fourEvent" prefHeight="60.0" prefWidth="60.0" text="4">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="seven" layoutX="16.0" layoutY="120.0" mnemonicParsing="false" onAction="#sevenEvent" prefHeight="60.0" prefWidth="60.0" text="7">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="eight" layoutX="76.0" layoutY="120.0" mnemonicParsing="false" onAction="#eightEvent" prefHeight="60.0" prefWidth="60.0" text="8">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="equal" layoutX="135.0" layoutY="300.0" mnemonicParsing="false" onAction="#equalEvent" prefHeight="60.0" prefWidth="60.0" text="=">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="three" layoutX="135.0" layoutY="240.0" mnemonicParsing="false" onAction="#threeEvent" prefHeight="60.0" prefWidth="60.0" text="3">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="zero" layoutX="76.0" layoutY="300.0" mnemonicParsing="false" onAction="#zeroEvent" prefHeight="60.0" prefWidth="60.0" text="0">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="two" layoutX="76.0" layoutY="240.0" mnemonicParsing="false" onAction="#twoEvent" prefHeight="60.0" prefWidth="60.0" text="2">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="dot" layoutX="16.0" layoutY="300.0" mnemonicParsing="false" onAction="#dotEvent" prefHeight="60.0" prefWidth="60.0" text=".">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="one" layoutX="16.0" layoutY="240.0" mnemonicParsing="false" onAction="#oneEvent" prefHeight="60.0" prefWidth="60.0" text="1">
+         <font>
+            <Font size="23.0" />
+         </font>
+      </Button>
+      <Button fx:id="back" layoutX="195.0" layoutY="80.0" mnemonicParsing="false" onAction="#backEvent" prefHeight="40.0" prefWidth="60.0" text="Back">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+      <TextField fx:id="exprField" alignment="CENTER_RIGHT" disable="true" layoutX="14.0" layoutY="14.0" prefHeight="40.0" prefWidth="242.0" text="0">
+         <font>
+            <Font size="28.0" />
+         </font>
+      </TextField>
+      <Button fx:id="clear" layoutX="135.0" layoutY="80.0" mnemonicParsing="false" onAction="#clearEvent" prefHeight="40.0" prefWidth="60.0" text="Clear">
+         <font>
+            <Font size="15.0" />
+         </font>
+      </Button>
+   </children>
+</AnchorPane>
